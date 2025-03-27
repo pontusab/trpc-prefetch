@@ -3,7 +3,7 @@
 import { useTRPC } from '@/trpc/client';
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
-export function ClientGreeting() {
+export function ClientGreetingUseSuspenseQuery() {
   const trpc = useTRPC(); 
   const queryClient = useQueryClient();
   
@@ -13,5 +13,5 @@ export function ClientGreeting() {
   const { data } = useSuspenseQuery(options);
   console.log('after suspense: rendering with state', queryClient.getQueryState(options.queryKey))
   
-  return <div>{data.greeting}</div>;
+  return <div>{data?.greeting ?? "loading..."}</div>;
 }
