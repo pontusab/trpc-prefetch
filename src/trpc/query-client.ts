@@ -15,6 +15,7 @@ import {
           shouldDehydrateQuery: (query) =>
             defaultShouldDehydrateQuery(query) ||
             query.state.status === 'pending',
+            shouldRedactErrors: () => false,
         },
         hydrate: {
           // deserializeData: superjson.deserialize,

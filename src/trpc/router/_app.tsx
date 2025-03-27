@@ -8,7 +8,9 @@ export const appRouter = createTRPCRouter({
         text: z.string(),
       }),
     )
-    .query((opts) => {
+    .query(async (opts) => {
+      console.log('running hello');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       return {
         greeting: `hello ${opts.input.text}`,
       };

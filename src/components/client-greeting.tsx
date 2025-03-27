@@ -1,11 +1,17 @@
 'use client';
+
 import { useTRPC } from '@/trpc/client';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { trpc } from '@/trpc/server';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 export function ClientGreeting() {
-  const trpc = useTRPC();
-  const {data} = useSuspenseQuery(trpc.hello.queryOptions({ text: 'world' }));
+  const trpc = useTRPC(); 
+  const queryClient = useQueryClient();
+  
+  const options = trpc.hello.queryOptions({ text: 'world' })
 
+  console.log('before suspense: rendering with state', queryClient.getQueryState(options.queryKey))
+  const { data } = useSuspenseQuery(options);
+  console.log('after suspense: rendering with state', queryClient.getQueryState(options.queryKey))
+  
   return <div>{data.greeting}</div>;
 }
