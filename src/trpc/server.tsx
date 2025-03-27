@@ -6,6 +6,7 @@ import { makeQueryClient } from './query-client';
 import { appRouter } from './router/_app';
 import { HydrationBoundary } from '@tanstack/react-query';
 import { dehydrate } from '@tanstack/react-query';
+import { inspect } from 'node:util';
  
 // IMPORTANT: Create a stable getter for the query client that
 //            will return the same client during the same request.
@@ -18,8 +19,11 @@ export const trpc = createTRPCOptionsProxy({
 
 export function HydrateClient(props: { children: React.ReactNode }) {
     const queryClient = getQueryClient();
+    const state = dehydrate(queryClient)
+    console.log('state', inspect(state, { depth: 4}))
+
     return (
-      <HydrationBoundary state={dehydrate(queryClient)}>
+      <HydrationBoundary state={state}>
         {props.children}
       </HydrationBoundary>
     );

@@ -1,14 +1,14 @@
 import { HydrateClient, prefetch, trpc } from '@/trpc/server';
 import { Suspense } from 'react';
-import { ClientGreeting } from '@/components/client-greeting';
+import { ClientGreetingUseSuspenseQuery } from '@/components/client-greeting-useSuspenseQuery';
  
-export default async function Home() {
+export default function Home() {
   prefetch(trpc.hello.queryOptions({ text: 'world' }));
   
   return (
     <HydrateClient>
          <Suspense fallback={<div>Loading...</div>}>
-          <ClientGreeting />
+          <ClientGreetingUseSuspenseQuery />
         </Suspense>
      </HydrateClient>
   );

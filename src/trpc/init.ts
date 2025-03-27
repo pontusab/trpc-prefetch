@@ -1,6 +1,11 @@
 import { initTRPC } from '@trpc/server';
+import { headers } from 'next/headers';
 import { cache } from 'react';
+
 export const createTRPCContext = cache(async () => {
+  // Force dynamic?
+  await headers()
+
   /**
    * @see: https://trpc.io/docs/server/context
    */
