@@ -11,6 +11,7 @@ import {
           staleTime: 30 * 1000,
         },
         dehydrate: {
+          // serializeData: superjson.serialize,
           // include pending queries in dehydration
           shouldDehydrateQuery: (query) =>
             defaultShouldDehydrateQuery(query) ||
