@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { baseProcedure, createTRPCRouter } from '../init'
-;
+import { baseProcedure, createTRPCRouter } from '../init';
 import { setTimeout } from 'node:timers/promises';
+
 export const appRouter = createTRPCRouter({
   hello: baseProcedure
     .input(
